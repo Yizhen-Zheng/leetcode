@@ -1,5 +1,9 @@
 class Solution:
     def firstMissingPositive(self, nums: list[int]) -> int:
+        '''
+        You must implement an algorithm that runs in O(n) time and uses O(1) auxiliary space.
+        This file does not work. It contains sketchy attempting 
+        '''
         missing = 1
         current_smallest = nums[0]
         #
