@@ -1,7 +1,7 @@
 class Solution:
     def mincostTickets(self, days: list[int], costs: list[int]) -> int:
         '''
-        O(3^N), not work
+        O(3^N), can calculate answer, but has memory limit exceed issue
         '''
         res = []
         self.helper(0, 0, days, costs, res)

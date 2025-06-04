@@ -3,6 +3,8 @@ class Solution:
         '''
         bottom up
         can use a simple for / while loop, instead of recursive
+        pay for yesterday(past travel) (or pay at the day ticket expires)
+
         '''
 
         calendar = [0]*366

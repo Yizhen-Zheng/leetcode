@@ -2,6 +2,7 @@ class Solution:
     def mincostTickets(self, days: list[int], costs: list[int]) -> int:
         '''
         bottom up
+        pay for yesterday(past travel) (or pay at the day ticket expires)
         '''
 
         calendar = [0]*(days[-1]+1)
