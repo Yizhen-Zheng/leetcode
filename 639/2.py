@@ -14,7 +14,7 @@ class Solution:
 
         cur = 0
         next = 1
-        next_next = 1
+        next_next = 0
 
         def check_ways(i):
             '''count extra ways (when 2 char can be paired)'''
@@ -49,12 +49,12 @@ class Solution:
         for i in range(len(s)-1, -1, -1):
             if s[i] == '0':
                 cur = 0
-                continue
+                # shouldn't continue, (continue will miss the updating cur, next, next_next value)
             elif s[i] == '*':
                 cur = 9*next
             else:
                 cur = next
-            if i < len(s)-1:
+            if i < len(s)-1 and s[i] != '0':
                 cur += check_ways(i)
             cur = cur % (1000000007)
             print(cur, ' ', next, ' ', next_next)
@@ -65,10 +65,11 @@ class Solution:
 
 
 # t = '1*'
-t = '1*203'
-# t = '22*6'
+# t = '1*203'
+t = '22*6'
 # t = '*0'
 # t = '10'
 # t = '1212121'
+# t = "*1*1*0"
 r = Solution().numDecodings(t)
 print(r)
