@@ -3,12 +3,12 @@
 class Solution:
     def numDecodings(self, s: str) -> int:
         '''
-        intuitive version: (without memoization)
+        improved version: tabulation
         a-z -> 1-26
         01 is not valid
-        intuitive: for each num, it can branch 2 ways, so it's 2^N
-        we can tabuiation or memoizaation to remember what way is valid previously 
 
+        we can tabulation or memoizaation to remember what way is valid previously 
+        yeh! 
         '''
 
         # this prove first is not 0
