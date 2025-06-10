@@ -1,7 +1,7 @@
 class Solution:
     def numDecodings(self, s: str) -> int:
         '''
-        TODO: nod work currently
+
         str of nums, may contain *, can be 1-9
         *-> 9 ; 3*->9; *2->9+2; 2*->15; **->9+9+6
         travel from tail to head
