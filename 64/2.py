@@ -14,31 +14,22 @@ class Solution:
         keep a list of previous row, and prev cell ([i][j-1])
         '''
         m, n = len(grid), len(grid[0])
-        dp = [[None] * n for _ in range(m)]
-        dp[0][0] = grid[0][0]
+        dp = [None] * n
+        dp[0] = grid[0][0]
+        for j in range(1, n):
+            dp[j] = dp[j-1]+grid[0][j]
 
-        def findWay(i, j):
-            if dp[i][j] != None:
-                return dp[i][j]
-
-            left = up = float('inf')
-            if j > 0:
-                left = findWay(i, j-1)
-            if i > 0:
-                up = findWay(i-1, j)
-            dp[i][j] = grid[i][j]+min(left, up)
-            return dp[i][j]
-
-        res = findWay(m-1, n-1)
-        print(dp)
-
-        return res
+        for i in range(1, m):
+            dp[0] = dp[0]+grid[i][0]
+            for j in range(1, n):
+                dp[j] = min(dp[j], dp[j-1])+grid[i][j]
+        return dp[-1]
 
 
-# t = [[1, 3, 1], [1, 5, 1], [4, 2, 1]]
+t = [[1, 3, 1], [1, 5, 1], [4, 2, 1]]
 # t = [[1, 2, 3], [4, 5, 6]]
 # t = [[1, 0], [5, 6]]
-t = [[1, 3, 4], [6, 2, 0]]
+# t = [[1, 3, 4], [6, 2, 0]]
 r = Solution().minPathSum(t)
 
 print(r)
