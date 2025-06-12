@@ -4,11 +4,11 @@ class Solution:
         a-smart-solution use db to trsck numbers as well
         '''
         dp = [0] * len(s)
-        idx = 0
+        idx = 1
         maximum = 0
         while idx < len(s):
             cur = s[idx]
-            if idx > 0 and cur == ')':
+            if cur == ')':
                 prev_idx = idx-dp[idx-1]-1
                 if prev_idx >= 0 and s[prev_idx] == '(':
                     dp[idx] = dp[idx-1]+2
