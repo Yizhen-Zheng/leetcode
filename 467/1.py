@@ -1,6 +1,7 @@
 class Solution:
     def findSubstringInWraproundString(self, s: str) -> int:
         '''
+        failed to solve myself
         initial thought:
         (ord(c)-ord(a))%26, then it's thread of c
         sum of each threads(should be unique)

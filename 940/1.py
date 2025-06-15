@@ -1,6 +1,7 @@
 class Solution:
     def distinctSubseqII(self, s: str) -> int:
         '''
+        failed to solve / think of ways myself
         seems combination
         2*(2^(n-1)-1)+1 = 2^n - 1
         which means: 2*prev + 1 = current (when no duplication)
