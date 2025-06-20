@@ -17,7 +17,6 @@ class Solution:
             prev_r_prev_c = 0
             for j in range(1, n):
                 prev_r_curr_c = dp[j]
-
                 if text1[i-1] == text2[j-1]:
                     '''
                     'ccre', 'era': 
@@ -33,7 +32,6 @@ class Solution:
                 else:
                     dp[j] = max(dp[j-1], prev_r_curr_c)
                 prev_r_prev_c = prev_r_curr_c
-
             print(dp, text1[i-1])
 
         return dp[-1]
