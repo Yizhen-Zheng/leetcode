@@ -8,7 +8,7 @@ class Solution:
         prime number that < n
         return how many prime numbers less than n
         brute-force: check from range (2, n), each check takes O(n) so it's a O(n^2)
-        seive of Eratosthenes: O(n log log n)
+        sieve of Eratosthenes: O(n log log n)
         n: check the whole arr (True or False)
         using each prime to mark p*p+p, p*p+2p, ... as False is approximately n/p 
         tota operations to mark all non-prime: sum(n/2, n/3, n/5, n/7...)(up to n**(1/2))
