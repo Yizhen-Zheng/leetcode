@@ -32,6 +32,16 @@ class MyStack:
         return val
 
     def top(self) -> int:
+        if self.empty():
+            return None
+        while len(self.queue_a) > 1:
+            val = self.queue_a.popleft()
+            self.queue_b.append(val)
+        self.last = self.queue_a.popleft()
+        self.queue_b.append(self.last)
+        # swap
+        self.queue_a = self.queue_b
+        self.queue_b = deque()
 
         return self.last
 
