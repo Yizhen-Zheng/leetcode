@@ -19,31 +19,16 @@ class Solution:
         [1,2,4]
         [3, 5]
         '''
-        if not list1:
-            return list2
-        if not list2:
-            return list1
-
-        if list1.val < list2:
-            cur1 = list1
-            cur2 = list2
-        else:
-            cur1 = list2
-            cur2 = list1
-
-        head = cur1
-        pre = cur1
-        cur1 = cur1.next
-        while cur1 and cur2:
-            if cur1.val < cur2.val:
-                pre.next = cur1
-                cur1 = cur1.next
+        def rec(l1, l2):
+            if not l1:
+                return l2
+            if not l2:
+                return l1
+            if l1.val < l2.val:
+                l1.next = rec(l1.next, l2)
+                return l1
             else:
-                pre.next = cur2
-                cur2 = cur2.next
-            pre = pre.next
-        if cur1:
-            pre.next = cur1
-        elif cur2:
-            pre.next = cur2
-        return head
+                l2.next = rec(l1, l2.next)
+                return l2
+
+        return rec(list1, list2)

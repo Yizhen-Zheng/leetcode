@@ -24,7 +24,7 @@ class Solution:
         if not list2:
             return list1
 
-        if list1.val < list2:
+        if list1.val < list2.val:
             cur1 = list1
             cur2 = list2
         else:
