@@ -9,6 +9,7 @@ class MyCircularDeque:
     further optimization:
     only keep head and size, get tail idx everytime get tail / infert
     benifits: when delete tail, only reduce size, no need to move tail idx and check
+    handle edge case naturally
     '''
 
     def __init__(self, k: int):
