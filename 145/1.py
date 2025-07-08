@@ -26,7 +26,7 @@ class Solution:
         recursion(root, res)
         return res
 
-    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+    def postorderTraversalII(self, root: Optional[TreeNode]) -> List[int]:
         '''
         '''
         res = []
@@ -43,3 +43,17 @@ class Solution:
                     stack.append((node.left, False))
 
         return res
+
+    def postorderTraversalII(self, root: Optional[TreeNode]) -> List[int]:
+        '''
+        right-first traverse, then reverse result
+        '''
+        res = []
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            if node:
+                res.append(node.val)
+                stack.append(node.left)
+                stack.append(node.right)
+        return reversed(res)

@@ -27,7 +27,7 @@ class Solution:
         recursion(root, res)
         return res
 
-    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+    def inorderTraversalII(self, root: Optional[TreeNode]) -> List[int]:
         '''
         left ->middle ->right
         stack:
@@ -46,4 +46,27 @@ class Solution:
                 stack.append((node, True))
                 stack.append((node.left, False))
 
+        return res
+
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        '''
+        left ->middle ->right
+        stack:
+        without trace back
+        if current is not leaf node: add current path to stack, to left 
+        if reached bottom, find prev(the leaf node, which is middle of 2 none children), 
+            add to res, go right
+            then find none again, back to last second layer, repeat go right
+        '''
+        res = []
+        stack = []
+
+        while stack or root:
+            if root:
+                stack.append(root)
+                root = root.left
+            else:
+                root = stack.pop()
+                res.append(root.val)
+                root = root.right
         return res
