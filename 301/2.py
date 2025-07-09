@@ -11,6 +11,23 @@ class Solution:
         breadth first traverse
         which is still slow 
         FIFO: pruning
+
+        for brute force: 
+            time: 
+                for each node, it has m children, and we try to remove each of them and ask if i can form a valid str
+                roughly O(2^n)
+            space: 
+                O(n) n: len(s), as recursion depth is maximum n 
+        below: both best case is O(n) (only check once and find it's done with pruning(we skip duplicated calculation))
+        BFS:    
+            time:
+                worst case: still O(2^n) roughly, if we have '))))))' or '((((', 
+            space: 
+                worst case: O(n^n), since we store all seen and a manula queue
+        recursion (prevent duplication version):
+            time: O(2^n),roughly
+            space:
+                worst case: O(n) (remove all)
         '''
 
         parentheses = list(s)
@@ -54,7 +71,7 @@ class Solution:
         FIFO: pruning
         this one works
         this looks fast on my local
-
+        maybe can be further optimized
         '''
 
         parentheses = s

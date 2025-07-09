@@ -6,6 +6,14 @@ class Solution:
 
     def removeInvalidParentheses(self, s: str) -> List[str]:
         '''
+        how to use reversed in a str:
+            >> my_str='hello'
+            >> r=reversed(my_str)
+            >> print(r)
+            <reversed object at 0x1053b73a0>
+            >> print(''.join(r))
+            olleh
+            >>> 
         '''
         ans = []
 
