@@ -13,7 +13,7 @@ class Solution:
             <reversed object at 0x1053b73a0>
             >> print(''.join(r))
             olleh
-            >>> 
+            >>
         '''
         ans = []
 
