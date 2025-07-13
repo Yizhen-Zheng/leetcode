@@ -64,7 +64,7 @@ class Solution:
                 if l_idx >= n:
                     return idx
                 smaller_idx = l_idx if heap[l_idx] < heap[r_idx] else r_idx
-                if heap[idx] <= heap[smaller_idx]:  # already
+                if heap[idx] <= heap[smaller_idx]:  # already put in correct position
                     return idx
                 heap[idx], heap[smaller_idx] = heap[smaller_idx], heap[idx]  # swap
                 idx = smaller_idx
