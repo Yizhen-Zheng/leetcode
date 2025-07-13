@@ -15,7 +15,7 @@ class Solution:
         for brute force: 
             time: 
                 for each node, it has m children, and we try to remove each of them and ask if i can form a valid str
-                roughly O(2^n)
+                roughly O(2^n)<-from n^n, roughly say as 2^n
             space: 
                 O(n) n: len(s), as recursion depth is maximum n 
         below: both best case is O(n) (only check once and find it's done with pruning(we skip duplicated calculation))
@@ -24,10 +24,14 @@ class Solution:
                 worst case: still O(2^n) roughly, if we have '))))))' or '((((', 
             space: 
                 worst case: O(n^n), since we store all seen and a manula queue
+                if we use a real queue(deque), this shuold be layer breadth(cuz we pop head)
         recursion (prevent duplication version):
             time: O(2^n),roughly
             space:
                 worst case: O(n) (remove all)
+        to calculate time complexity thoroughly, we need:
+        n! + (n-1)! + ... 1!
+
         '''
 
         parentheses = list(s)
