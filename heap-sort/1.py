@@ -83,6 +83,10 @@ class min_heap:
     def heapify_bottom_up(self, arr):
         n = len(arr)
         for i in range(n//2-1, -1, -1):
+            # how to know the last second layer's last elem:
+            # len//2-1
+            # 2->2*2+1=4, <- (4+1)//2-1=2
+            # 2->2*2+2=5, <- (5+1)//2-1=2
             idx = i
             smallest_idx = idx
             while idx < n:  # heap down
