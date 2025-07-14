@@ -48,7 +48,7 @@ class Solution:
 
     def removeInvalidParentheses(self, s: str) -> List[str]:
         '''
-        stack version BFS
+        stack version DFS
         '''
 
         parentheses = list(s)
