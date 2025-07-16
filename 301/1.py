@@ -4,13 +4,68 @@ import time
 
 class Solution:
 
+    def removeInvalidParenthesesRecII(self, s: str) -> List[str]:
+        '''
+        non-optimal, but in evolutino version
+        first calculate how many need to remove
+        by purning duplicated ones, this works fast
+        '''
+        rmL, rmR = 0, 0
+        for char in s:
+            if char == '(':
+                rmL += 1
+            elif char == ')':
+                if rmL:
+                    rmL -= 1
+                else:
+                    rmR += 1
+
+        def dfs(i: int, rmL: int, rmR: int, pl: int, one: list[str], res: set[str]):
+            '''     
+            DFS to generate all valid strings
+            i: current position in string s
+            rmL: remaining left parentheses to remove
+            rmR: remaining right parentheses to remove
+            pl: current balance(open parentheses count)(if '('more than ')', pr>0, vice versa)
+            one: current string being built
+            res: result set
+            since this is using an 'one' array for str building, we cannot use set to lookup every step since that requires join str(O(n)) each lookup
+            so this need to use skip duplication
+            '''
+            # base case
+            if i == len(s) or rmL < 0 or rmR < 0 or pl < 0:
+                if rmL == 0 and rmR == 0 and pl == 0:
+                    res.add(''.join(one))
+                return
+            char = s[i]
+            if char == '(':
+                if (not len(one)) or one[-1] != '(':
+                    dfs(i+1, rmL-1, rmR, pl, one, res)
+                one.append('(')
+                dfs(i+1, rmL, rmR, pl+1, one, res)
+            elif char == ')':
+                if (not len(one)) or one[-1] != ')':
+                    dfs(i+1, rmL, rmR-1, pl, one, res)
+                one.append(')')
+                dfs(i+1, rmL, rmR, pl-1, one, res)
+            else:
+                one.append(char)
+                dfs(i+1, rmL, rmR, pl, one, res)
+            if len(one) > 0:
+                one.pop()
+        res = set()
+        one = []
+
+        dfs(0, rmL, rmR, 0, one, res)
+        return list(res)
+
     def removeInvalidParentheses(self, s: str) -> List[str]:
         '''
         num of parentheses may smaller than n, since s contains lower alphabets
+        lack of early pruning to prevent duplicated cases (need a seen or skip '((((' in a row)
         increase lower boundary as we find smaller removal
         which is slow since we are depth first traverse and exploring potentially invalid branches
         '''
-        start = time.time()
         parentheses = list(s)
         lower_boundary = 0
         res = set()
@@ -42,8 +97,7 @@ class Solution:
                     new_boundary = max(new_boundary, rec(newp, new_boundary))
             return new_boundary
         lower_boundary = rec(parentheses, lower_boundary)
-        end = time.time()
-        print(end-start)
+
         return list(filter(lambda x: len(x) == lower_boundary, list(res), ))
 
     def removeInvalidParentheses(self, s: str) -> List[str]:
@@ -86,9 +140,11 @@ class Solution:
 
 
 t = ''
-t = '()'
-t = '())'
+t = ')'
+# t = '()'
+# t = '())'
 t = '()a)'
-t = '(())a))'
-r = Solution().removeInvalidParentheses(t)
+# t = '(())a))'
+r = Solution().removeInvalidParenthesesRecII(t)
+# r = Solution().removeInvalidParentheses(t)
 print(r)

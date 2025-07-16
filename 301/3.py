@@ -14,6 +14,7 @@ class Solution:
             >> print(''.join(r))
             olleh
             >>
+        same as below, i guess one of them is i rewrited myself 
         '''
         ans = []
 

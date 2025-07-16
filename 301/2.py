@@ -128,10 +128,11 @@ class Solution:
             increase lower boundary as we find smaller removal
             breadth first traverse
             FIFO: pruning
-            this one works
-            this looks fast on my local
-            maybe can be further optimized
-            '''
+            by only processing non-duplicated str only, this gets faster
+            >> s=')'
+            >> print([s[:0]])
+            >> ['']
+        '''
 
         def check(p) -> bool:
             count = 0
@@ -154,7 +155,7 @@ class Solution:
                 res.append(cur)
             elif not res:
                 for i in range(start_idx, len(cur)):
-                    if (not (ord('a') <= ord(cur[i]) <= ord('z'))) and (cur[i] == 0 or cur[i] != cur[i-1]):
+                    if (cur[i] == '(' or cur[i] == ')') and (i == 0 or cur[i] != cur[i-1]):
                         newp = cur[:i]+cur[i+1:]
                         q.append((newp, i))
 
@@ -162,7 +163,8 @@ class Solution:
 
 
 t = ''
-t = ')('
+t = '('
+# t = ')('
 # t = '()'
 # t = '())'
 # t = '()a)'
