@@ -60,7 +60,7 @@ class Solution:
             val, _, node = heapq.heappop(q)
             cur_node.next = node
             cur_node = cur_node.next  # cur is the last valid elem in q
-            if node.next:
-                heapq.heappush(q, (node.next.val, c, node.next))  # only push not None elem into q
+            if node.next:  # only push not None elem into q
+                heapq.heappush(q, (node.next.val, c, node.next))
             c += 1
         return dummy.next
