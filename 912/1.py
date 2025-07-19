@@ -1,6 +1,15 @@
 from typing import List
 import time
 
+# TODO:Tim sort,
+# TODO:shell sort,
+# TODO:cyclic sort
+
+'''
+stability: need at least O(N) space complexity so far
+(merge, count, radix, bubble, insert)
+'''
+
 
 class Solution:
     def sortArray(self, nums: List[int]) -> List[int]:
@@ -28,7 +37,7 @@ class Solution:
             ptr_a = ptr_b = 0
             merged = []
             while ptr_a < len(a) and ptr_b < len(b):
-                if a[ptr_a] < b[ptr_b]:
+                if a[ptr_a] <= b[ptr_b]:  # left <= right: stability
                     merged.append(a[ptr_a])
                     ptr_a += 1
                 else:

@@ -3,7 +3,7 @@ import time
 from typing import List
 
 '''
-seems quick sort is very space efficient (buz merge needs to create temp new array)
+seems quick sort is very space efficient (cuz merge needs to create temp new array)
 Quicksort 
     O(log n) stack depth, each level swap in place
 Mergesort 
