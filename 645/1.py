@@ -55,7 +55,11 @@ class Solution:
 
     def findErrorNums(self, nums: list[int]) -> list[int]:
         '''
-
+        if a^b=c:
+        c^a=b, c^b=a
+        a^a=0
+        python does not have a sign bit
+        print((-1024)>>31) will give -1
         '''
         n = len(nums)
         xor_expected = 0
