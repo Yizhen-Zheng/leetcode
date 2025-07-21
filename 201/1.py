@@ -16,10 +16,10 @@ class Solution:
         e,g,:
         0 1 0 0 1 1
         0 0 1 1 1 1
-        res: 0, since they differ from first digit
+        res: 0, since they diverge from first significant digit
         0 1 1 0 1 1
         0 1 1 1 1 1
-        res: 011000, they differ from 3rd digit, and have first 2 digits the same
+        res: 011000, they diverge from 3rd digit, and have first 2 digits the same
         '''
         a, b = left, right
         ans = 0
@@ -48,6 +48,16 @@ class Solution:
             right >>= 1
             count += 1
         return left << count
+
+    def rangeBitwiseAnd(self, left: int, right: int) -> int:
+        '''
+        equal to above
+        extract the least significant digit of right, and remove it (substract)
+        until find the digit before they 'diverge'
+        '''
+        while left < right:
+            right -= (right & (-right))
+        return right
 
 
 t = [2, 3]
