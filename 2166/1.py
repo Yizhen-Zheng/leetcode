@@ -1,47 +1,141 @@
 
-# class BitsetI:
+class BitsetI:
 
-#     def __init__(self, size: int):
-#         self.values = [0]*((size+31)//32)
-#         self.size = size
-#         self.count_bits = 0
+    def __init__(self, size: int):
+        self.values = [0]*((size+31)//32)
+        self.size = size
+        self.count_ones = 0
+        self.flipped = False
 
-#     def fix(self, idx: int) -> None:
+    def fix(self, idx: int) -> None:
 
-#         (bucket_idx, bit_idx) = self.get_idx(idx)
-#         self.values[bucket_idx] |= (1 << bit_idx)
-#         self.count_bits += 1
+        (bucket_idx, bit_idx) = self.get_idx(idx)
+        target_digit = (self.values[bucket_idx] >> bit_idx) & 1
+        if not self.flipped:
+            if not target_digit:
+                self.values[bucket_idx] |= (1 << bit_idx)
+                self.count_ones += 1
+        else:
+            if target_digit:
+                self.values[bucket_idx] ^= (1 << bit_idx)
+                self.count_ones -= 1
 
-#     def unfix(self, idx: int) -> None:
-#         bucket_idx, bit_idx = self.get_idx(idx)
-#         mask = self.manual_not(1 << bit_idx)
-#         self.values[bucket_idx] &= mask
-#         self.count_bits -= 1
+    def unfix(self, idx: int) -> None:
+        bucket_idx, bit_idx = self.get_idx(idx)
+        target_digit = (self.values[bucket_idx] >> bit_idx) & 1
+        if not self.flipped:
+            if target_digit:
+                self.values[bucket_idx] ^= (1 << bit_idx)
+                self.count_ones -= 1
+        else:
+            if not target_digit:
+                self.values[bucket_idx] |= (1 << bit_idx)
+                self.count_ones += 1
 
-#     def flip(self) -> None:
-#         for i in range(len(self.values)):
-#             self.values[i] ^= ((1 << 32)-1)
-#         self.count_bits = self.size-self.count_bits
-#         return
+    def flip(self) -> None:
+        self.flipped = not self.flipped
 
-#     def all(self) -> bool:
-#         for i in range(len(self.values)-1):
-#             if self.values[i] != 0xFFFFFFFF:
-#                 return False
-#         last_bucket = self.values[-1]
-#         for i in range(self.size % 32):
-#             if not last_bucket & 1:
-#                 return False
-#             last_bucket >>= 1
+    def all(self) -> bool:
 
-#     def one(self) -> bool:
-#         return sum(self.values) > 0
+        return self.count_ones == self.size if (not self.flipped) else (self.count_ones == 0)
 
-#     def count(self) -> int:
-#         return self.count_bits
+    def one(self) -> bool:
+        return self.count_ones > 0 if not (self.flipped) else self.count_ones < self.size
 
-#     def toString(self) -> str:
-#         res=[]
+    def count(self) -> int:
+        return self.count_ones if not (self.flipped) else self.size-self.count_ones
+
+    def toString(self) -> str:
+        res = []
+        for i in range(self.size):
+            (bucket_idx, bit_idx) = self.get_idx(i)
+            target_digit = ((self.values[bucket_idx] >> bit_idx) & 1) ^ self.flipped
+            res.append(str(target_digit))
+
+        return ''.join(res)
+
+    def get_idx(self, num):
+        '''
+        args: 
+            num: the number to store
+        return: 
+            bucket_idx: the integer's idx,
+            bit_idx: the digit to offset, [0,31], inclusive
+        '''
+        if num > self.size-1 or num < 0:
+            return -1
+        bucket_idx = num//32
+        bit_idx = num % 32
+        return (bucket_idx, bit_idx)
+
+
+class BitsetII:
+
+    def __init__(self, size: int):
+        self.value = 0
+        self.size = size
+        self.count_ones = 0
+        self.flipped = False
+
+    def fix(self, idx: int) -> None:
+
+        target_digit = (self.value >> idx) & 1
+        if not self.flipped:
+            if not target_digit:
+                self.value |= (1 << idx)
+                self.count_ones += 1
+        else:
+            if target_digit:
+                self.value ^= (1 << idx)
+                self.count_ones -= 1
+
+    def unfix(self, idx: int) -> None:
+
+        target_digit = (self.value >> idx) & 1
+        if not self.flipped:
+            if target_digit:
+                self.value ^= (1 << idx)
+                self.count_ones -= 1
+        else:
+            if not target_digit:
+                self.value |= (1 << idx)
+                self.count_ones += 1
+
+    def flip(self) -> None:
+        self.flipped = not self.flipped
+
+    def all(self) -> bool:
+        return self.count_ones == self.size if (not self.flipped) else (self.count_ones == 0)
+
+    def one(self) -> bool:
+        return self.count_ones > 0 if not (self.flipped) else self.count_ones < self.size
+
+    def count(self) -> int:
+        return self.count_ones if not (self.flipped) else self.size-self.count_ones
+
+    def toString(self) -> str:
+        res = []
+        value = self.value
+        for _ in range(self.size):
+            target_digit = (value & 1) ^ self.flipped
+            res.append(str(target_digit))
+            value >>= 1
+
+        return ''.join(res)
+
+    # def get_idx(self, num):
+    #     '''
+    #     args:
+    #         num: the number to store
+    #     return:
+    #         bucket_idx: the integer's idx,
+    #         bit_idx: the digit to offset, [0,31], inclusive
+    #     '''
+    #     if num > self.size-1 or num < 0:
+    #         return -1
+    #     bucket_idx = num//32
+    #     bit_idx = num % 32
+    #     return (bucket_idx, bit_idx)
 
 
 class Bitset:
