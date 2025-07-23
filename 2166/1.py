@@ -120,7 +120,6 @@ class BitsetII:
             target_digit = (value & 1) ^ self.flipped
             res.append(str(target_digit))
             value >>= 1
-
         return ''.join(res)
 
     # def get_idx(self, num):
