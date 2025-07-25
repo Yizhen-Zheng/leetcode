@@ -112,3 +112,36 @@ class Solution:
                 prev = cur
                 cur = temp
         return head_of_all
+
+    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        '''
+        recursive, 
+        time: O(n)
+        space:O(k)(stack depth)
+        forward recursion has the same space usage as backward
+        if go with forward, next iretation will bed called before connecting group_tail to next head
+        '''
+        if not head:
+            return None
+        group_head = None  # 1st elem in reversed order
+        group_tail = None  # last elem in reversed order
+
+        for _ in range(k):
+            if not head:  # no enough node ramaining
+                return group_tail
+            if not group_tail:
+                group_tail = head
+            group_head = head  # update last elemend record in current group
+            head = head.next  # now head is in next group
+        next_head = self.reverseKGroup(group_head.next, k)
+        count = 0
+        prev = next_head
+        ptr = group_tail
+        while count < k:
+            temp = ptr.next
+            ptr.next = prev
+            prev = ptr
+            ptr = temp
+            count += 1
+
+        return group_head
