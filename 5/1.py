@@ -194,12 +194,77 @@ class Solution:
                 # why slice like this?
                 max_str = modified[i-dp[i]:i+dp[i]+1].replace('#', '')
         return max_str
+    #
+    #
+    #
+    #
+
+    def longestPalindrome(self, s: str) -> str:
+        '''
+        try to write expanding one 
+        12min
+        '''
+
+        max_l, max_r = -1, -1
+        longest_len = 0
+
+        def expand(s, l, r):
+            n = len(s)
+            while l-1 > -1 and r + 1 < n and s[l-1] == s[r+1]:
+                l -= 1
+                r += 1
+            return l, r
+
+        for i in range(len(s)):
+            odd_l, odd_r = expand(s, i, i)
+            even_l, even_r = expand(s, i, i+1)
+            if (odd_r-odd_l+1) > longest_len:
+                max_l, max_r = odd_l, odd_r
+                longest_len = odd_r-odd_l+1
+            if (even_r-even_r+1) > longest_len:
+                max_l, max_r = even_l, even_r
+                longest_len = even_r-even_r+1
+        return s[max_l:max_r+1]
+
+    def longestPalindrome(self, s: str) -> str:
+        '''
+        try write M algorithm
+        30 min (include debug)
+        '''
+        ss = s.replace('', '#')
+        n = len(ss)
+        center = 0
+        right_bound = 0
+        max_center = 0
+
+        dp = [0]*n  # record only right length
+        print(ss)
+        for i in range(n):
+            if i < right_bound:
+                # try find its mirror
+                dp[i] = min(right_bound-i, dp[center-(i-center)])
+                # NOTE i forgot  dp[center-(i-center)], not center-(i-center)
+            l, r = i-dp[i]-1, i+dp[i]+1
+            while l > -1 and r < n and ss[l] == ss[r]:  # expand from known len
+                print()
+                print(l, r)
+                dp[i] += 1
+                l, r = l-1, r+1
+            if i+dp[i] > right_bound:
+                center = i
+                right_bound = i+dp[i]  # NOTE i forgot this
+            if dp[i] > dp[max_center]:  # update record
+                max_center = i
+        max_l, max_r = max_center-dp[max_center], max_center+dp[max_center]
+        max_str = ss[max_l:max_r+1].replace('#', '')
+        return max_str
 
 
 t = ''
 # t = 'a'
-# t = 'abc'
-t = 'abcec'
+t = 'abc'
+# t = 'abcec'
 # t = 'aacabdkacaa'
+t = "bacabab"
 r = Solution().longestPalindrome(t)
 print(r)
