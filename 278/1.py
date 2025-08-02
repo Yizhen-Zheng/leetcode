@@ -8,7 +8,9 @@ class Solution:
         '''
         binary search
         left boundary
-        3min+4min(dry run )
+        3min+4min(dry run)
+        NOTE other language have 32int overflow issue
+        when l+r >= 1<<32: use s+(e-s)//2
         '''
         l, r = 1, n
         while l < r:
