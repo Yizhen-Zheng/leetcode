@@ -88,6 +88,8 @@ class Solution:
         '''
         stack
         it's flatten structure as always converting 'local' operator into correct global mean
+        alternatively, store every operator in stack and pop when finish one calculating
+        current one only store those are not 'refreshed off'(scope ones),so exclude one-time operator
         '''
         stack = [1]
         idx = 0
@@ -111,10 +113,10 @@ class Solution:
                 operator = cur_operator*stack[-1]
                 # reset cur num in processing
                 cur_number = 0
-            else:
-                # idx+=1
-                # continue
-                pass
+            # else: # if white space, skip
+            #     # idx+=1
+            #     # continue
+            #     pass
             idx += 1
         res += cur_number*operator  # add tail number
         return res
