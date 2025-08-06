@@ -24,7 +24,6 @@ class MedianFinder:
         heapq.heappush(self.right, left_top)
         if len(self.left) < len(self.right):
             heapq.heappush(self.left, -heapq.heappop(self.right))
-
         return
         print(self.left)
         print(self.right)
@@ -52,7 +51,6 @@ class MedianFinder:
     def findMedian(self) -> float:
         print(self.left)
         print(self.right)
-
         if len(self.left) != len(self.right):  # if odd left, even right
             return -self.left[0]
         else:  # both even
