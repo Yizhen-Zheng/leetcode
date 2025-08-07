@@ -263,7 +263,6 @@ class Solution:
             include_cur = jobs[i][2] + (dp[last_i] if last_i != -1 else 0)
             exclude_cur = dp[i+1]
             dp[i] = max(include_cur, exclude_cur)
-        print(dp)
         return dp[0]
 
 
