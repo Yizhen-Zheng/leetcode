@@ -1,3 +1,4 @@
 {
-  "geminicodeassist.inlineSuggestions.enableAuto": false
+  "geminicodeassist.inlineSuggestions.enableAuto": false,
+  "github.copilot.editor.enableAutoCompletions": false
 }
