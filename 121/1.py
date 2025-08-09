@@ -8,17 +8,16 @@ class Solution:
         total 41 min
         divide and conquer(for every pos, the order if left part doesn'y matter)
         divide and conquer:
-        t: O(nlogn)?
+        t: O(n)
         s:O(logn)(stack depth)
-        # l, r = 0, n-1
-        # while l < r:
-        #     best = max(best, prices[r]-prices[l])
-        #     if prices[r-1] > prices[r]:
-        #         r -= 1
-        #     # elif prices[l+1] < prices[l]:
-        #     #     l += 1
-        #     else:
-        #         l += 1
+        T(n)=2*T(n/2)+O(1)
+        T(1)=O(1)
+        master theorem:
+        T(n)=a*T(n/b)+f(n)
+        assume origin input so solve has size n
+        a: num of subproblem created at each rec calls
+        b: factor of reducing subproblem(next rec call has size n/b to solve)
+        f(n): time in each rec call(like merge, partation)
         '''
         n = len(prices)
         best = 0
