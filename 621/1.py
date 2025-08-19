@@ -118,7 +118,7 @@ class Solution:
                 max_frequency_count = 1
             elif m[i] == max_frequency:
                 max_frequency_count += 1
-        ans = (n+1)*(max_frequency-1)+max_frequency
+        ans = (n+1)*(max_frequency-1)+max_frequency_count
         return max(ans, len(tasks))
 
 
