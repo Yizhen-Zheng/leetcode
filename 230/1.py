@@ -51,3 +51,24 @@ class Solution:
             return idx, None
         _, res = rec(root, 0)
         return res.val
+
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        '''
+        iterative
+        7min
+        t:O(k)
+        s:O(n)(need store nodes from root, l, r )
+        '''
+        s = [(root, False)]
+        count = 0
+        while s:
+            cur, visited = s.pop()
+            if cur != None and visited:
+                count += 1
+                if count == k:
+                    return cur.val
+            elif cur != None:
+                s.append((cur.right, False))
+                s.append((cur, True))
+                s.append((cur.left, False))
+        return
