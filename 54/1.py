@@ -5,6 +5,7 @@ class Solution:
         31min
         t:O(n*m)
         s:O(n*m)
+        another idea is use len_can_go, reduce len_x, len_y by one at each row/col
         '''
         m = len(matrix)
         n = len(matrix[0])
@@ -54,7 +55,36 @@ class Solution:
             bottom -= 1
         return ans
 
+    def spiralOrder(self, matrix: list[list[int]]) -> list[int]:
+        '''
+        another solution
+        '''
+        ans = []
+        m, n = len(matrix), len(matrix[0])
+        left, right, top, bottom = 0, n-1, 0, m-1  # boundary
+        while left <= right and top <= bottom:
+            for x in range(left, right+1):
+                ans.append(matrix[top][x])
+            top += 1
+            for y in range(top, bottom+1):
+                ans.append(matrix[y][right])
+            right -= 1
+            if top < bottom:  # edge case: t = [[1, 2]]
+                # if True:# demostrate buggy case, will add duplicated ones
+                for x in range(right, left-1, -1):
+                    ans.append(matrix[bottom][x])
+                bottom -= 1
+            if left < right:  # edge case: t = [[1], [2], [3]]]
+                for y in range(bottom, top-1, -1):
+                    ans.append(matrix[y][left])
+                left += 1
+        return ans
+
 
 t = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+t = [[1]]
+t = [[1, 2]]
+t = [[1], [2], [3]]
+
 r = Solution().spiralOrder(t)
 print(r)
