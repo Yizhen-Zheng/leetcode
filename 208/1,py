@@ -1,0 +1,153 @@
+
+class Trie:
+    '''
+    10:23-11:06
+    word len<2000
+    brute force: 2000 layers of trie, each layer has 26 nodes
+    omg passed
+
+    '''
+
+    def __init__(self):
+        self.size = 0
+        self.elems = set()
+        self.children = {}  # space: O(26^word_len)
+        return
+
+    def insert(self, word: str) -> None:
+        '''
+        t: O(len(word))
+        s: O(len(word))
+        '''
+        self.elems.add(word)
+        cur = self.children
+        for c in word:
+            if c not in cur:
+                cur[c] = {}
+            cur = cur[c]
+        return
+
+    def search(self, word: str) -> bool:
+        '''O(1)'''
+        return word in self.elems
+
+    def startsWith(self, prefix: str) -> bool:
+        '''
+        t: O(len(prefix))
+        s: O(1)
+        '''
+
+        cur = self.children
+        for c in prefix:
+            if c not in cur:
+                return False
+            cur = cur[c]
+        return True
+
+
+class Trie:
+    '''
+    solution:
+    use a '*' to denote there's a word ends at current layer
+
+    '''
+
+    def __init__(self):
+        self.size = 0
+        self.children = {}
+        return
+
+    def insert(self, word: str) -> None:
+        '''
+        t: O(len(word))
+        s: O(len(word))
+        '''
+        cur = self.children
+        for c in word:
+            if c not in cur:
+                cur[c] = {}
+            cur = cur[c]
+        cur['word_end'] = True
+        return
+
+    def search(self, word: str) -> bool:
+        '''O(word_len)'''
+        cur = self.children
+        for c in word:
+            if c not in cur:
+                return False
+            cur = cur[c]
+
+        return 'word_end' in cur
+
+    def startsWith(self, prefix: str) -> bool:
+        '''
+        t: O(len(prefix))
+        s: O(1)
+        '''
+        cur = self.children
+        for c in prefix:
+            if c not in cur:
+                return False
+            cur = cur[c]
+        return True
+
+
+class TrieNode:
+    def __init__(self):
+        self.word_end = False
+        self.children = {}
+
+
+class Trie:
+    '''a more structured way'''
+
+    def __init__(self):
+        self.root = TrieNode()
+        return
+
+    def insert(self, word: str) -> None:
+        '''
+        t: O(len(word))
+        s: O(len(word))
+        '''
+        cur = self.root
+        for c in word:
+            if c not in cur.children:
+                cur.children[c] = TrieNode()
+            cur = cur.children[c]
+        cur.word_end = True
+        return
+
+    def search(self, word: str) -> bool:
+        '''O(word_len)'''
+        cur = self.root
+        for c in word:
+            if c not in cur.children:
+                return False
+            cur = cur.children[c]
+
+        return cur.word_end
+
+    def startsWith(self, prefix: str) -> bool:
+        '''
+        t: O(len(prefix))
+        s: O(1)
+        '''
+        cur = self.root
+        for c in prefix:
+            if c not in cur.children:
+                return False
+            cur = cur.children[c]
+        return True
+
+
+# Your Trie object will be instantiated and called as such:
+obj = Trie()
+print(obj)
+r = obj.insert('apple')
+r = param_2 = obj.search('apple')
+print(r)
+r = param_3 = obj.startsWith('app')
+r = param_3 = obj.startsWith('appx')
+print(r)
