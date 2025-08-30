@@ -3,18 +3,7 @@ class Solution:
         '''
         16:15-
         cur,center
-        # cur, center, center_len = 0, 0, 0
-        # ss = '#'+'#'.join(s)+'#'
-        # print(ss)
-        # n = len(ss)
-        # max_len = [0]*n
-        # for i in range(n):
-        #     l, r = i-1, i+1
-        #     expand = 0
-        #     while l > -1 and r < n:
-        #         expand += 1
-        #         l -= 1
-        #         r += 1
+
         i misunderstood the question...
         '''
         # 16:45-16:50
