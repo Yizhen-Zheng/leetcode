@@ -29,7 +29,8 @@ class Solution:
     def addBinary(self, a: str, b: str) -> str:
         '''
         solution:
-
+        this is simpler and more general
+        2 ptr slide from last digit to 0th digit, 
         '''
         s = []
         carry = 0
