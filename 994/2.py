@@ -7,7 +7,8 @@ class Solution:
         review
         7:58-8:13
         15min
-        i remember this should be able to do with DFS?
+        i remember this should be able to do with DFS?(no seems not)
+        another way to count step:
         '''
         m, n = len(grid), len(grid[0])
         directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
@@ -31,6 +32,35 @@ class Solution:
                         grid[newi][newj] = 2  # rotten next
                         q.append((newi, newj))
             step += 1 if q else 0
+        return step if count_fresh == 0 else -1
+
+    def orangesRotting(self, grid: list[list[int]]) -> int:
+        '''
+        review
+        solution: instead of for cur len in q, track how far for each spot
+        BFS and mark as visited ensures shortest, so no need to use max(step,cur_step)
+        '''
+        m, n = len(grid), len(grid[0])
+        directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+        step = 0
+        count_fresh = 0
+        q = deque()
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 2:
+                    q.append((i, j, 0))
+                elif grid[i][j] == 1:
+                    count_fresh += 1
+        while q:
+            cur_i, cur_j, count_step = q.popleft()
+            # step = max(step, count_step)
+            step = count_step
+            for ii, jj in directions:
+                newi, newj = cur_i+ii, cur_j+jj
+                if -1 < newi < m and -1 < newj < n and grid[newi][newj] == 1:
+                    count_fresh -= 1
+                    grid[newi][newj] = 2  # rotten next
+                    q.append((newi, newj, count_step+1))
         return step if count_fresh == 0 else -1
 
 
