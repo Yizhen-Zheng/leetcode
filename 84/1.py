@@ -83,7 +83,7 @@ class Solution:
                 elif r == e:
                     l -= 1
                 else:
-                    if heights[l-1] > heights[r+1]:
+                    if heights[l-1] > heights[r+1]:  # expand to the higher bar
                         l -= 1
                     else:
                         r += 1
@@ -96,7 +96,7 @@ class Solution:
             left = divide(s, m)
             right = divide(m+1, e)
             l_or_r_max = max(left, right)
-            merged_max = merge(s, m, e)
+            merged_max = merge(s, m, e)  # max area across center
             return max(l_or_r_max, merged_max)
         return divide(0, n-1)
 
