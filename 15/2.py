@@ -52,9 +52,10 @@ class Solution:
 
         for i in range(0, n-2):
             a = nums[i]
-            if a <= 0:
+            if a <= 0:  # at least one elem <=0
                 j, k = i+1, n-1
                 while j < k and nums[k] >= 0:  # between i+1 and n-1 there can be multiple solution
+                    # at least one elem >= 0(k)
                     if a+nums[j]+nums[k] == 0:
                         b, c = nums[j], nums[k]
                         if (a, b, c)not in seen:
