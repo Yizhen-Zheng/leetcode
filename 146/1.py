@@ -9,7 +9,7 @@ from collections import defaultdict, OrderedDict
 class LRUCache:
     class ListNode:
         def __init__(self, val, key, prev=None, next=None):
-            self.val = val
+            self.val = val  # seems val does'n matter in DLL, only use table to lookup val
             self.key = key
             self.prev = prev
             self.next = next
@@ -114,19 +114,19 @@ class LRUCache:
         val = self.buket.get(key)
         if val == None:
             return -1
-        del self.buket[key]
-        self.buket[key] = val  # activate key
+        del self.buket[key]  # remove from middle
+        self.buket[key] = val  # add to right-most (activate/refresh key)
         return val
 
     def put(self, key: int, value: int) -> None:
         val = self.buket.get(key)
         if not val:  # need to add new, check size
             if len(self.buket) >= self.capacity:
-                first_in = next(iter(self.buket))
+                first_in = next(iter(self.buket))  # use iter to access first in elem
                 self.buket.pop(first_in)  # remove tail in FIFO
         else:  # last activate
-            self.buket.pop(key)  # move active to end(last accessed)
-        self.buket[key] = value
+            self.buket.pop(key)  # first remove it to move active to end(last accessed)
+        self.buket[key] = value  # add to top(last, or right)
 
 
 r = LRUCache(2)
