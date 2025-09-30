@@ -91,3 +91,67 @@ class Codec:
 # ser = Codec()
 # deser = Codec()
 # ans = deser.deserialize(ser.serialize(root))
+
+
+'''
+traversal by layer
+'''
+
+
+class Codec:
+    '''
+    watch solution: use queue
+    '''
+
+    def serialize(self, root: TreeNode):
+        """Encodes a tree to a single string.
+
+        :type root: TreeNode
+        :rtype: str
+        """
+        if not root:
+            return json.dumps(None)
+        ans = [root.val]
+        q = deque([root])
+        while q:
+            cur = q.popleft()
+            if cur.left:
+                ans.append(cur.left.val)
+                q.append(cur.left)
+            else:
+                ans.append(None)
+            if cur.right:
+                ans.append(cur.right.val)
+                q.append(cur.right)
+            else:
+                ans.append(None)
+        return json.dumps({'ans': ans})
+
+    def deserialize(self, data):
+        """Decodes your encoded data to tree.
+
+        :type data: str
+        :rtype: TreeNode
+
+        TODO here
+        """
+        tree_data = json.loads(data)
+        if not tree_data:
+            return None
+
+        vals = tree_data['ans']
+        q = deque(vals)
+        root = TreeNode(q.popleft())
+        parents = deque([root])
+        while q:
+            l, r = q.popleft(), q.popleft()
+            if l is not None:
+                l = TreeNode(l)
+                parents.append(l)
+            if r is not None:
+                r = TreeNode(r)
+                parents.append(r)
+            p = parents.popleft()
+            p.left, p.r = l, r
+
+        return root
