@@ -1,8 +1,12 @@
 class Solution:
+    '''
+    the 1st and 2ed both travel the whole n^2 binary tree!
+    but 1st uses less stack sizess
+    '''
     def allSubstring(s: str):
         '''
         enumerate all combinations
-        O(2^n)(2^n * n), n for build a substr
+        O(2^n)(2^n * n), n for build a substr(str concat)
         about 7 min?
         '''
         ans = {''}

@@ -19,7 +19,7 @@ class Solution:
             if not node:
                 return 0, True  # height is 0
             hl, lb = dfs(node.left)
-            hr, rb = dfs(node.left)
+            hr, rb = dfs(node.right)
             return 1+max(hl, hr), abs(hl-hr) <= 1 and lb and rb
         _, balanced = dfs(root)
         return balanced

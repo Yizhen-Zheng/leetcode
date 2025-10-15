@@ -95,6 +95,7 @@ class Codec:
 
 '''
 traversal by layer
+IT WORKS!
 '''
 
 
@@ -133,7 +134,6 @@ class Codec:
         :type data: str
         :rtype: TreeNode
 
-        TODO here
         """
         tree_data = json.loads(data)
         if not tree_data:
@@ -152,6 +152,6 @@ class Codec:
                 r = TreeNode(r)
                 parents.append(r)
             p = parents.popleft()
-            p.left, p.r = l, r
+            p.left, p.right = l, r
 
         return root

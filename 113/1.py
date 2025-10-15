@@ -15,6 +15,7 @@ class Solution:
         way to mark as invalid
         6:4?-7:10, around 25-30 min
         rather than checking not none, maybe just handle a basic condition that cur node is none in dfs
+        this makes code much simpler
         '''
         if not root:
             return []

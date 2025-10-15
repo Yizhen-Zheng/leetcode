@@ -34,6 +34,7 @@ class Solution:
     def minDepth(self, root: Optional[TreeNode]) -> int:
         '''
         solution BFS: reach the nearest leaf node and stop
+        or use deq, append(node, depth)
         '''
         if not root:
             return 0

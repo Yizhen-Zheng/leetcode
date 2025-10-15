@@ -40,6 +40,11 @@ class Solution:
 
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
         '''
+        inorder: check if prev < cur
+        '''
+
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        '''
         inorder: iterative
         '''
         s = []
@@ -48,10 +53,11 @@ class Solution:
         while s or cur:
             if cur:
                 s.append(cur)  # add mid to s
-                cur = root.left
+                cur = cur.left
             else:
                 cur = s.pop()
-                if cur.val < prev_val:
+                if cur.val <= prev_val:
                     return False
                 prev_val = cur.val
+                cur = cur.right
         return True
