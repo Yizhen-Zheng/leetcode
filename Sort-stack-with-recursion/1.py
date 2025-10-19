@@ -1,5 +1,7 @@
 '''
 Sort the stack in ascending order (smallest element at the bottom and largest at the top).
+t: n**2
+s: n
 '''
 
 
